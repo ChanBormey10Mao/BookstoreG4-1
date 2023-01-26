@@ -8,7 +8,7 @@ namespace BookStoreG4Web.Models
 		//Telling Id is primary Key
 		[Key]
 
-		public int Id { get; set; }
+		public string Id { get; set; }
 		[Required] //Id is required cause it is primary key
 
 		public string Title { get; set; }
