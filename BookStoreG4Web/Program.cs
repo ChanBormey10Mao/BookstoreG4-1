@@ -2,8 +2,7 @@
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//Will needed it 
-//builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+//Any connection, servers, emails... do it before the builder here
 
 var app = builder.Build();
 
