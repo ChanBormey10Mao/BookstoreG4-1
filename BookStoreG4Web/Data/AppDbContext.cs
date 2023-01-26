@@ -1,5 +1,5 @@
 ﻿using System;
-using BookStoreG4Web.Models
+using BookStoreG4Web.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreG4Web.Data

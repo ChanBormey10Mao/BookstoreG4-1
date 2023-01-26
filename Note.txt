@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+---Command for adding Migration:
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add AddCategoryToDatabase
+---
+
+</configuration>
+
