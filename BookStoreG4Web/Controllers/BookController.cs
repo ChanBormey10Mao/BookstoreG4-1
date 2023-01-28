@@ -24,6 +24,12 @@ namespace BookStoreG4Web.Controllers
             IEnumerable<Book> objBookList = _db.Books;
             return View(objBookList);
         }
+        
+        public IActionResult Reserve()
+        {
+            IEnumerable<Book> objBookList = _db.Books;
+            return View(objBookList);
+        }
     }
 }
 

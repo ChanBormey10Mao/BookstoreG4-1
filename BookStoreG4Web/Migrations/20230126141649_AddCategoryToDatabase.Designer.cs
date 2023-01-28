@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreG4Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230126123352_AddCategoryToDatabase")]
+    [Migration("20230126141649_AddCategoryToDatabase")]
     partial class AddCategoryToDatabase
     {
         /// <inheritdoc />
@@ -39,6 +39,28 @@ namespace BookStoreG4Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookStoreG4Web.Models.Customer", b =>
+                {
+                    b.Property<string>("Cus_Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Cus_Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cus_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cus_Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Cus_Id");
+
+                    b.ToTable("Customers");
                 });
 #pragma warning restore 612, 618
         }

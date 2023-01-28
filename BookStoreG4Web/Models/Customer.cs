@@ -7,7 +7,6 @@ namespace BookStoreG4Web.Models
     {
         //Telling Id is primary Key
         [Key]
-
         public string Cus_Id { get; set; }
         [Required] //Id is required cause it is primary key
 
@@ -15,10 +14,8 @@ namespace BookStoreG4Web.Models
         public string Cus_Email { get; set; }
         public string Cus_Password { get; set; }
 
-        //set createDateTime to be the present time
-        //public DateTime CreateDateTime { get; set; } = DateTime.Now;
-
 
 
     }
 }
+

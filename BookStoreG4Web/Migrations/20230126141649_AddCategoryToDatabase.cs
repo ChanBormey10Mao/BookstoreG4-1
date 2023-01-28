@@ -22,6 +22,20 @@ namespace BookStoreG4Web.Migrations
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    CusId = table.Column<string>(name: "Cus_Id", type: "nvarchar(450)", nullable: false),
+                    CusName = table.Column<string>(name: "Cus_Name", type: "nvarchar(max)", nullable: false),
+                    CusEmail = table.Column<string>(name: "Cus_Email", type: "nvarchar(max)", nullable: false),
+                    CusPassword = table.Column<string>(name: "Cus_Password", type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.CusId);
+                });
         }
 
         /// <inheritdoc />
@@ -29,6 +43,9 @@ namespace BookStoreG4Web.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }
