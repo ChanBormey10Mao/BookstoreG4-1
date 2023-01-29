@@ -1,74 +1,108 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BookStoreG4Web</title>
     <link rel="stylesheet" href="~/css/bootwatchMorphtheme.css" />
-  
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BookStoreG4Web.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
+        @*Start Nav bar*@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">BookStoreG4</a>
+                @*logo*@
+                <a class="navbar-brand" asp-controller="Book">BookStoreG4</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
+                       
+                        @*Page if customer wanna See the list of all books*@
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">Books</a>
+                        </li>
+                        @*Page if customer wanna return the book*@
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Book" asp-action="ReturnList">Return</a>
+                        </li>
+
+                        <li class="nav-item">
+
+                            @using Microsoft.AspNetCore.Http
+                            @inject IHttpContextAccessor Accessor
+
+                            @{
+                                Layout = null;
+
+
+                            }
+                            @*If customer is login, display "logout" button" *@
+                            @if (@Accessor.HttpContext.Session.GetString("Cus_Id") == "None")
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="Index">Login</a>
+                            }
+                            @*If Customer is logged out, display login button*@
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="LogOut">Log Out</a>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">Book</a>
+                            @*Welcome MessageDisplayed if Customer is logged in otherwise none*@
+                            @using Microsoft.AspNetCore.Http
+                            @inject IHttpContextAccessor Accessor
+
+                            @{
+                                Layout = null;
+
+                            }
+
+                            @if (@Accessor.HttpContext.Session.GetString("Cus_Id") == "None")
+                            {
+                                <span></span>
+                            }
+                            else
+                            {
+                                <h3 class="fs-3 text-light position-absolute top-50 start-50 translate-middle">
+                                    Welcome, @Accessor.HttpContext.Session.GetString("Cus_Name")
+
+                                </h3>
+                            }
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="Index">Login</a>
-                        </li>
-                        @*<li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-        </li>*@
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    @*End of Nav Bar*@
+                    @*Search field : Searching from the list of books*@
+                    <form class="d-flex" method="post" asp-controller="Book" asp-action="Index">
+                        <input class="form-control me-sm-2" type="search" placeholder="Search For Books" name="searchString">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
-            </div>
-        </nav>
-       
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+                </div>
+            </nav>
 
-    <footer class="footer text-muted">
+        </header>
+    @*Render to other views*@
         <div class="container">
-            &copy; 2023 - BookStoreG4Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+    @*Footer*@
+        <footer class="footer text-muted">
+            <div class="container">
+                &copy; 2023 - BookStoreG4Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
 </html>
 

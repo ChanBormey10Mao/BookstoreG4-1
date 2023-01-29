@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Book List";
 }
 
 <div class="container p-3">
@@ -9,39 +9,58 @@
         <div class="col-6">
             <h2 class="text-primary">Book List</h2>
         </div>
-       
+
     </div>
 </div>
+@*If the Search Strings doesnt match any of the books in database*@
+@if (Model.Count() == 0)
+{
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>
-                Book Title
-            </th>
-            <th>
-                Reservation
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var obj in Model)
-        {
-             <tr>
-                 <td width="40%">
-                     @obj.Title
-                 </td>
-                 <td width="30%">
-                     @obj.IsReserved
-                 </td width="30%">
-                 <td>
-                     <div class="col-6 text-end">
-                         <a asp-controller="Book" asp-action="Reserve" class="btn btn-outline-primary btn-sm">
-                             Reserve
-                         </a>
-                     </div>
-                 </td>
-             </tr>
-        }
-    </tbody>
-</table> 
+
+    <h2>No book(s) matched</h2>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Book Title
+                </th>
+                <th>
+                    Reservation
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @*The List of obj from book controller can be searched or all the books will display*@
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="40%">
+                        @obj.Title
+                    </td>
+                    
+                    <td width="30%">
+                        <div class="col-6 text-start">
+                            @*If the book is reserved, Make it Unavailable*@
+                            @if (@obj.IsReserved == true)
+                            {
+                                <a class="text-secondary text-dark" style="text-decoration: none;">
+                                    Unavailable
+                                </a>
+                            }
+                            @*Else: Allow Reserve*@
+                            else
+                            {
+                                <a asp-controller="Book" asp-action="Reserve" asp-route-book_id=@obj.Id class="btn btn-outline-primary btn-sm">
+                                    Reserve
+                                </a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

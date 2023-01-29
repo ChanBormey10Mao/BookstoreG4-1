@@ -13,7 +13,7 @@ namespace BookStoreG4Web.Models
         public string Cus_Name { get; set; }
         public string Cus_Email { get; set; }
         public string Cus_Password { get; set; }
-
+        public bool IsLogin { get; set; }
 
 
     }

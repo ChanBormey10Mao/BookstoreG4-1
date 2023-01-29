@@ -14,6 +14,7 @@ namespace BookStoreG4Web.Data
 		//Create a Table name Books with the attr as the Models.Book (id, title, isReserved)
 		public DbSet<Book> Books { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }
 

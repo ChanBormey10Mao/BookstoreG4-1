@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Book List</h2>
+        </div>
+       
+    </div>
+</div>
+@*If there is no book reserved*@
+@if (Model.Count() == 0)
+    {
+<h2>There is no reservation(s).</h2>
+    }
+    else
+    {
+        
+        //else , display the table of all the books reserved by the log-in customer
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Book Title
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @*Display all objs from Book Controller*@
+        @foreach (var obj in Model)
+            {
+             <tr>
+                 <td width="40%">
+                     @obj.Title
+                 </td>
+                 <td width="30%">
+                     <div class="col-6 text-start">
+                        
+                         <a asp-controller="Book" asp-action="Return" asp-route-book_id=@obj.Id  class="btn btn-outline-primary btn-sm">
+                             Return
+                         </a>
+                         
+                     </div>
+                 </td>
+             </tr>
+            }
+    </tbody>
+</table>
+    }

@@ -1,27 +1,27 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStoreG4Web.Models
 {
     public class Reservation
     {
-        //Telling Id is primary Key
+        //Telling Id is primary Key, and auto incremented by databse
         [Key]
-
-        public string Reserve_Id { get; set; }
+        public int Reserve_Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required] //Id is required cause it is primary key
+        
 
         public string Book_Id { get; set; }
         
         public string Cus_Id { get; set; }
-        
 
+        public DateTime ReservedTime { get; set; } = DateTime.Now;
 
-
-        //set createDateTime to be the present time
-        public DateTime ReserveTime { get; set; } = DateTime.Now;
-        public DateTime ReturnTime { get; set; } = DateTime.Now + TimeSpan.FromDays(14);
-
+        //check if reservation is returned
+        public bool IsReturn { get; set; } = false;
+        public DateTime ReturnedTime { get; set; } 
 
 
     }
