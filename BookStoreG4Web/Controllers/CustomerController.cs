@@ -67,6 +67,7 @@ namespace BookStoreG4Web.Controllers
         public IActionResult LogOut(string email, string pwd)
         {
             HttpContext.Session.Clear(); // it will clear the session at the end of request
+            HttpContext.Session.SetString("Cus_Id", "None");
             return RedirectToAction("Index", "Book");//Redirect to Book List page
         }
     }

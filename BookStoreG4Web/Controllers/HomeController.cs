@@ -20,8 +20,8 @@ public class HomeController : Controller
     {
         //Determine No customer has login
         HttpContext.Session.SetString("Cus_Id", "None");
-        
-        return View();
+
+        return RedirectToAction("Index", "Book");//Redirect to Book List page
     }
 
     
