@@ -3,7 +3,22 @@
 ---Command for adding Migration:
 dotnet tool install --global dotnet-ef
 dotnet ef migrations add AddCategoryToDatabase
+dotnet ef database update
 ---
+INSERT INTO Books(Id,Title,isReserved) VALUES('9b0896fa-3880-4c2e-bfd6-925c87f22878','CQRS for Dummies', 0);
+INSERT INTO Books(Id,Title,isReserved) VALUES('0550818d-36ad-4a8d-9c3a-a715bf15de76','Visual Studio Tips', 0);
+INSERT INTO Books(Id,Title,isReserved) VALUES('8e0f11f1-be5c-4dbc-8012-c19ce8cbe8e1','NHibernate Cookbook', 0);
 
+INSERT INTO Customers(Cus_Id,Cus_Name,Cus_Email,Cus_Password, IsLogin) VALUES('513bcb90-9d85-11ed-a8fc-0242ac120002','A','A@gmail.com','A12345', 0);
+INSERT INTO Customers(Cus_Id,Cus_Name,Cus_Email,Cus_Password, IsLogin) VALUES
+('513bcde8-9d85-11ed-a8fc-0242ac120002','B','B@gmail.com','B12345', 0);
+INSERT INTO Customers(Cus_Id,Cus_Name,Cus_Email,Cus_Password, IsLogin) VALUES
+('513bcf28-9d85-11ed-a8fc-0242ac120002','C','C@gmail.com','C12345', 0);
+
+
+DROP TABLE dbo.Books
+DROP TABLE dbo.Customers
+DROP TABLE dbo.Reservations
+DROP TABLE dbo.__EFMigrationsHistory
 </configuration>
 
